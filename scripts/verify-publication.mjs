@@ -32,9 +32,11 @@ const artifact = JSON.parse(fs.readFileSync(path.join(root, 'ocs-deepseek.json')
 assert.deepEqual(artifact, createConfig());
 assert.equal(artifact[0].headers.Authorization, 'Bearer REPLACE_WITH_YOUR_DEEPSEEK_API_KEY');
 const guide = fs.readFileSync(path.join(root, 'docs/guide.md'), 'utf8');
-const configBlock = guide.match(/```json\n(\[\n[\s\S]*?)\n```/);
-assert(configBlock, 'Full configuration appendix missing');
-assert.deepEqual(JSON.parse(configBlock[1]), artifact, 'Guide configuration differs from build');
+const configLink = guide.match(/\[[^\]]+\]\(([^)]+\.json)\)/);
+assert(configLink, 'Configuration link missing from guide');
+const guideConfigPath = path.resolve(root, 'docs', configLink[1]);
+assert.equal(guideConfigPath, path.resolve(root, 'ocs-deepseek.json'), 'Guide must link to the published configuration');
+assert(fs.existsSync(guideConfigPath), 'Linked configuration file is missing');
 assert(fs.readFileSync(path.join(root, 'THIRD_PARTY_NOTICES.md'), 'utf8').includes('2022 enncy'));
 assert(fs.readFileSync(path.join(root, 'README.md'), 'utf8').includes('非官方'));
-console.log(`PASS: ${files.length} allowlisted public files; placeholders, provenance, and guide/config parity verified.`);
+console.log(`PASS: ${files.length} allowlisted public files; placeholders, provenance, and guide configuration link verified.`);

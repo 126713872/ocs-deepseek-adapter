@@ -3,7 +3,7 @@
 适用：Windows / Edge、OCS 5.2.1。已安装的组件可跳过。
 
 1. 安装[油猴](https://www.tampermonkey.net/index.php?browser=edge)。在 `edge://extensions` 启用扩展，按提示允许用户脚本或开启开发者模式。
-2. 安装 [OCS](https://cdn.ocsjs.com/ocs.user.js)。在油猴中编辑 OCS，将下面一行加在脚本头部 `// ==/UserScript==` 之前，按 `Ctrl+S`：
+2. 安装 [OCS](https://cdn.ocsjs.com/ocs.user.js)。在油猴中编辑 OCS，按 `Ctrl+Home` 回到文件顶部。找到第一组 `// ==UserScript==` 与其下方第一个 `// ==/UserScript==` 之间的元信息区（带有 `@name`、`@version`）。在该区已有的 `// @connect` 行下方添加下面一行，按 `Ctrl+S`：
 
    ```javascript
    // @connect api.deepseek.com

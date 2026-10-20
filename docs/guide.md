@@ -3,11 +3,16 @@
 适用：Windows / Edge、OCS 5.2.1。已安装的组件可跳过。
 
 1. 安装[油猴](https://www.tampermonkey.net/index.php?browser=edge)。在 `edge://extensions` 启用扩展，按提示允许用户脚本或开启开发者模式。
-2. 安装 [OCS](https://cdn.ocsjs.com/ocs.user.js)。在油猴中编辑 OCS，按 `Ctrl+Home` 回到文件顶部。找到第一组 `// ==UserScript==` 与其下方第一个 `// ==/UserScript==` 之间的元信息区（带有 `@name`、`@version`）。在该区已有的 `// @connect` 行下方添加下面一行，按 `Ctrl+S`：
+2. 安装 [OCS](https://cdn.ocsjs.com/ocs.user.js)。打开油猴“管理面板 → OCS 网课助手 → 编辑”：
 
-   ```javascript
-   // @connect api.deepseek.com
-   ```
+   1. 按 `Ctrl+Home` 回到文件顶部，找到**脚本最前面的元信息区**，范围在第一组 **`// ==UserScript==`** 与其下方第一个 **`// ==/UserScript==`** 之间。
+   2. 在这个元信息区找到其他 **`@connect`** 行，**和它们放在一起**，添加这一行：
+
+      ```javascript
+      // @connect      api.deepseek.com
+      ```
+
+   按 `Ctrl+S` 保存。
 
 3. 在 [DeepSeek 平台](https://platform.deepseek.com/)创建 API Key，确认 API 账户有余额。
 4. 打开学习通章节页 → OCS“通用 → 全局设置 → 题库配置”，粘贴[配置](../ocs-deepseek.json)全文。只将 `REPLACE_WITH_YOUR_DEEPSEEK_API_KEY` 换成自己的 Key，保留 `Bearer `（含空格），保存并刷新。
